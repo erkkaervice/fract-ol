@@ -6,13 +6,13 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
-#    Updated: 2024/10/04 16:20:16 by eala-lah         ###   ########.fr        #
+#    Updated: 2024/10/07 11:50:01 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = fractol
 
-INCS        = -I ./inc/
+INCS        = -I ./inc/ -I ./libft/inc/
 LIBFT_DIR   = libft/
 LIBFT       = $(LIBFT_DIR)/libft.a
 MLX_DIR     = mlx42/
@@ -30,7 +30,7 @@ CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror -fPIC
 GIT_FLAGS   = git clone --depth 1
 
-all: $(OBJ_DIR) $(MLX) $(LIBFT) $(NAME)
+all: $(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -52,7 +52,7 @@ $(LIBFT):
 	@if [ ! -d "$(LIBFT_DIR)" ]; then \
 		$(GIT_FLAGS) https://github.com/erkkaervice/libft.git $(LIBFT_DIR) > /dev/null 2>&1 || exit 1; \
 	fi
-	@make -C $(LIBFT_DIR) CFLAGS="-Wall -Wextra -Werror -fPIC" 2> /dev/stderr > /dev/null
+	@make -C $(LIBFT_DIR) CFLAGS="-Wall -Wextra -Werror -fPIC -I ./inc/" 2> /dev/stderr > /dev/null
 	@echo "Libft library built."
 
 $(NAME): $(OBJS)
