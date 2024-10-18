@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/10/18 12:59:53 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:19:14 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int	main(void)
 	mlx_t		*mlx;
 	t_fractal	*fractal;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "Fractol", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "fractol", true);
 	if (!mlx)
 		return (1);
 	fractal = init_fractal(mlx);
