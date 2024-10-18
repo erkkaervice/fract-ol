@@ -6,6 +6,18 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
+#    Updated: 2024/10/18 12:53:44 by eala-lah         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
 #    Updated: 2024/10/11 14:05:04 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -28,6 +40,7 @@ OBJS        = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror $(INCS) -fPIC
 GIT_FLAGS   = git clone --depth 1
+MLX_FLAGS   = -L $(MLX_DIR)/build -lmlx42 -lglfw -lGL -lm -lpthread -ldl
 
 all: $(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
 
@@ -48,10 +61,10 @@ $(LIBFT):
 	@make -C $(LIBFT_DIR) CFLAGS="-Wall -Wextra -Werror -fPIC -I ./inc/" > /dev/null 2>&1 || { echo "Failed to build libft library."; exit 1; }
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c inc/fractol.h
-	@$(CC) $(CFLAGS) $(INCS) -c $< -o $@ 2>/dev/stderr || { echo "Failed to compile $<."; exit 1; }
+	@$(CC) $(CFLAGS) -c $< -o $@ 2>/dev/stderr || { echo "Failed to compile $<."; exit 1; }
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L $(MLX_DIR)/build -lmlx42 -L $(LIBFT_DIR) -lft -lm -lXext -lX11 2>/dev/stderr || { echo "Failed to create executable $(NAME)."; exit 1; }
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX_FLAGS) -L $(LIBFT_DIR) -lft 2>/dev/stderr || { echo "Failed to create executable $(NAME)."; exit 1; }
 
 bonus: all
 
