@@ -1,54 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractal.c                                          :+:      :+:    :+:   */
+/*   frc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/01 14:22:02 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:09:58 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_fractal	*init_fractal(mlx_t *mlx)
+t_frc	*init_frc(mlx_t *mlx)
 {
-	t_fractal	*fractal;
+	t_frc	*frc;
 
-	fractal = malloc(sizeof(t_fractal));
-	if (!fractal)
+	frc = malloc(sizeof(t_frc));
+	if (!frc)
 	{
-		ft_printf("Error: Failed to allocate fractal structure.\n");
+		ft_printf("Error: Failed to allocate frc structure.\n");
 		return (NULL);
 	}
-	fractal->img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!fractal->img)
+	frc->img = mlx_new_image(mlx, WID, HEI);
+	if (!frc->img)
 	{
 		ft_printf("Error: Failed to create image.\n");
-		free(fractal);
+		free(frc);
 		return (NULL);
 	}
-	fractal->type = MANDELBROT;
-	fractal->zoom = 1.0;
-	fractal->offset_x = 0;
-	fractal->offset_y = 0;
-	fractal->mlx = mlx;
-	return (fractal);
+	frc->type = MANDELBROT;
+	frc->zoom = 1.0;
+	frc->offset_x = 0;
+	frc->offset_y = 0;
+	frc->mlx = mlx;
+	return (frc);
 }
 
-void	render_fractal(t_fractal *fractal)
+void	render_frc(t_frc *frc)
 {
-	if (!fractal->img)
+	if (!frc->img)
 	{
 		ft_printf("Error: No image to render.\n");
-		return;
+		return ;
 	}
-
-	if (fractal->type == MANDELBROT)
-		render_mandelbrot(fractal);
-	else if (fractal->type == JULIA)
-		render_julia(fractal);
-
-	mlx_image_to_window(fractal->mlx, fractal->img, 0, 0);
+	if (frc->type == MANDELBROT)
+		render_mandelbrot(frc);
+	else if (frc->type == JULIA)
+		render_julia(frc);
+	mlx_image_to_window(frc->mlx, frc->img, 0, 0);
 }
