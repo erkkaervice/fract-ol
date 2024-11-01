@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/10/23 14:03:24 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:22:01 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ void		render_fractal(t_fractal *fractal);
 void		render_mandelbrot(t_fractal *fractal);
 void		render_julia(t_fractal *fractal);
 void		handle_key(mlx_key_data_t keydata, void *param);
+void		clear_fractal_image(t_fractal *fractal);
 
 #endif
