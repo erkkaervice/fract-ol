@@ -6,36 +6,11 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:18:09 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 14:57:28 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:00:22 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "color.h"
-
-int	calculate_mandelbrot_color(int i)
-{
-	if (i == MAX_ITER)
-		return (0x000000FF);
-	return ((i * 255 / MAX_ITER) << 16);
-}
-
-int	calculate_julia_color(int i)
-{
-	if (i == MAX_ITER)
-		return (0x000000FF);
-	return ((i * 255 / MAX_ITER) << 8);
-}
-
-int	calculate_color(int i, t_frc_type type)
-{
-	if (i == MAX_ITER)
-		return (0x000000FF);
-	if (type == MANDELBROT)
-		return ((i * 255 / MAX_ITER) << 16);
-	else if (type == JULIA)
-		return ((i * 255 / MAX_ITER) << 8);
-	return (0x000000FF);
-}
 
 int	calculate_psychedelic_color(int i, int max_iter)
 {
