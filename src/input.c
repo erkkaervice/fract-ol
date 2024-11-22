@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:13:23 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:08:52 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 	else if (keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_UP)
-			frc->offset_y -= 0.1 / frc->zoom;
+			frc->offset_y -= OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_DOWN)
-			frc->offset_y += 0.1 / frc->zoom;
+			frc->offset_y += OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_LEFT)
-			frc->offset_x -= 0.1 / frc->zoom;
+			frc->offset_x -= OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_RIGHT)
-			frc->offset_x += 0.1 / frc->zoom;
+			frc->offset_x += OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_Z)
-			frc->zoom *= 1.1;
+			frc->zoom *= ZOOM_STEP;
 		else if (keydata.key == MLX_KEY_X)
-			frc->zoom /= 1.1;
+			frc->zoom /= ZOOM_STEP;
 	}
 	render_frc(frc);
 }

@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:26:18 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:05:45 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 # include "../libft/inc/libft.h"
 # include "keys.h"
 # include <math.h>
+# include <stdlib.h>
 
 # define WID 900
 # define HEI 900
+# define MAX_ITER 100
+# define ZOOM_STEP 1.1
+# define OFFSET_STEP 0.1
 
 typedef enum e_frc_type
 {
 	MANDELBROT,
-	JULIA
+	JULIA,
+	UNKNOWN_FRACTAL
 }	t_frc_type;
 
 typedef struct s_frc
@@ -37,10 +42,11 @@ typedef struct s_frc
 	double			offset_y;
 }	t_frc;
 
-t_frc	*init_frc(mlx_t *mlx);
+t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);
 void	render_frc(t_frc *frc);
 void	render_mandelbrot(t_frc *frc);
 void	render_julia(t_frc *frc);
 void	handle_key(mlx_key_data_t keydata, void *param);
+void	free_frc(t_frc *frc);
 
 #endif

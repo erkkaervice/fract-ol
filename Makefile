@@ -6,7 +6,7 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
-#    Updated: 2024/10/23 14:25:25 by eala-lah         ###   ########.fr        #
+#    Updated: 2024/11/22 12:20:00 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ MLX         = $(MLX_DIR)/libmlx42.a
 
 SRC_DIR     = src/
 SRC         = \
+    color.c \
     fractal.c \
     input.c \
     julia.c \

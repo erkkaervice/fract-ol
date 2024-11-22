@@ -5,19 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 13:13:07 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:28:35 by eala-lah         ###   ########.fr       */
+/*   Created: 2024/10/23 13:17:00 by eala-lah          #+#    #+#             */
+/*   Updated: 2024/11/22 14:50:44 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static int	calculate_mandelbrot_color(int i)
-{
-	if (i == 100)
-		return (0x000000FF);
-	return ((i * 255 / 100) << 16);
-}
+#include "color.h"
 
 static void	calculate_mandelbrot_pixel(int x, int y, t_frc *frc)
 {
@@ -32,14 +26,14 @@ static void	calculate_mandelbrot_pixel(int x, int y, t_frc *frc)
 	z[0] = 0;
 	z[1] = 0;
 	i = 0;
-	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < 100)
+	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
 	{
 		tmp = z[0] * z[0] - z[1] * z[1] + c[0];
 		z[1] = 2 * z[0] * z[1] + c[1];
 		z[0] = tmp;
 		i++;
 	}
-	color = calculate_mandelbrot_color(i);
+	color = calculate_psychedelic_color(i, 100);
 	mlx_put_pixel(frc->img, x, y, color);
 }
 

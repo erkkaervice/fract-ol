@@ -5,19 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 13:14:22 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/01 15:25:02 by eala-lah         ###   ########.fr       */
+/*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
+/*   Updated: 2024/11/22 14:50:57 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static int	calculate_julia_color(int i)
-{
-	if (i == 100)
-		return (0x000000FF);
-	return ((i * 255 / 100) << 8);
-}
+#include "color.h"
 
 static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 {
@@ -29,14 +23,14 @@ static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 	z[0] = (x - WID / 2.0) * (4.0 / WID) / frc->zoom + frc->offset_x;
 	z[1] = (y - HEI / 2.0) * (4.0 / HEI) / frc->zoom + frc->offset_y;
 	i = 0;
-	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < 100)
+	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
 	{
 		tmp = z[0] * z[0] - z[1] * z[1] + c_re;
 		z[1] = 2 * z[0] * z[1] + 0.27015;
 		z[0] = tmp;
 		i++;
 	}
-	color = calculate_julia_color(i);
+	color = calculate_psychedelic_color(i, 100);
 	mlx_put_pixel(frc->img, x, y, color);
 }
 
