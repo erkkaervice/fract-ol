@@ -6,11 +6,11 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:18:09 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 15:00:22 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:06:43 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color.h"
+#include "fractol.h"
 
 int	calculate_psychedelic_color(int i, int max_iter)
 {

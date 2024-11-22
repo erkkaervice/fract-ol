@@ -6,12 +6,11 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 14:50:57 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:06:19 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include "color.h"
 
 static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 {

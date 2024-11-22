@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 14:05:45 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:07:01 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/inc/libft.h"
 # include "keys.h"
+# include "colors.h"
 # include <math.h>
 # include <stdlib.h>
 
