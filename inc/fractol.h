@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:02:14 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:18:55 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ typedef enum e_frc_type
 
 typedef struct s_frc
 {
-	mlx_t			*mlx;
-	mlx_image_t		*img;
-	t_frc_type		type;
-	double			zoom;
-	double			offset_x;
-	double			offset_y;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_frc_type	type;
+	double		zoom;
+	double		offset_x;
+	double		offset_y;
+	double		x_scale;
+	double		y_scale;
 }	t_frc;
 
 t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);

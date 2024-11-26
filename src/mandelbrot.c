@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:17:00 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 15:06:19 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:17:40 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static void	calculate_mandelbrot_pixel(int x, int y, t_frc *frc)
 	double	tmp;
 	int		color;
 
-	c[0] = (x - WID / 2.0) * (4.0 / WID) / frc->zoom + frc->offset_x;
-	c[1] = (y - HEI / 2.0) * (4.0 / HEI) / frc->zoom + frc->offset_y;
+	c[0] = frc->x_scale * (x - WID / 2.0) / frc->zoom + frc->offset_x;
+	c[1] = frc->y_scale * (y - HEI / 2.0) / frc->zoom + frc->offset_y;
+	
 	z[0] = 0;
 	z[1] = 0;
 	i = 0;
@@ -36,11 +37,14 @@ static void	calculate_mandelbrot_pixel(int x, int y, t_frc *frc)
 	mlx_put_pixel(frc->img, x, y, color);
 }
 
+
 void	render_mandelbrot(t_frc *frc)
 {
 	int	y;
 	int	x;
 
+	frc->x_scale = 4.0 / WID;
+	frc->y_scale = 4.0 / HEI;
 	y = 0;
 	while (y < HEI)
 	{

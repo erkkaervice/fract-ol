@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 15:06:19 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:17:21 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 	double	tmp;
 	int		color;
 
-	z[0] = (x - WID / 2.0) * (4.0 / WID) / frc->zoom + frc->offset_x;
-	z[1] = (y - HEI / 2.0) * (4.0 / HEI) / frc->zoom + frc->offset_y;
+	z[0] = frc->x_scale * (x - WID / 2.0) / frc->zoom + frc->offset_x;
+	z[1] = frc->y_scale * (y - HEI / 2.0) / frc->zoom + frc->offset_y;
+
 	i = 0;
 	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
 	{
@@ -33,6 +34,7 @@ static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 	mlx_put_pixel(frc->img, x, y, color);
 }
 
+
 void	render_julia(t_frc *frc)
 {
 	int		y;
@@ -40,6 +42,8 @@ void	render_julia(t_frc *frc)
 	double	c_re;
 
 	c_re = -0.7;
+	frc->x_scale = 4.0 / WID;
+	frc->y_scale = 4.0 / HEI;
 	y = 0;
 	while (y < HEI)
 	{
