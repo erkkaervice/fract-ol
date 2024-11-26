@@ -6,11 +6,46 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 14:08:52 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:19:58 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	zoom_on_mouse_position(t_frc *frc, int zoom_in)
+{
+	int		mouse_x;
+	int		mouse_y;
+	double	mouse_re;
+	double	mouse_im;
+	double	zoom_factor;
+
+	mlx_get_mouse_pos(frc->mlx, &mouse_x, &mouse_y);
+	mouse_re = (mouse_x - WID / 2.0) * (4.0 / WID) / frc->zoom + frc->offset_x;
+	mouse_im = (mouse_y - HEI / 2.0) * (4.0 / HEI) / frc->zoom + frc->offset_y;
+	if (zoom_in)
+		zoom_factor = ZOOM_STEP;
+	else
+		zoom_factor = 1.0 / ZOOM_STEP;
+	frc->zoom *= zoom_factor;
+	frc->offset_x = mouse_re - (mouse_x - WID / 2.0) * (4.0 / WID) / frc->zoom;
+	frc->offset_y = mouse_im - (mouse_y - HEI / 2.0) * (4.0 / HEI) / frc->zoom;
+	frc->x_scale = 4.0 / WID / frc->zoom;
+	frc->y_scale = 4.0 / HEI / frc->zoom;
+}
+
+void	handle_mouse_scroll(double x, double y, void *param)
+{
+	t_frc	*frc;
+
+	(void)x;
+	frc = (t_frc *)param;
+	if (y > 0)
+		zoom_on_mouse_position(frc, 1);
+	else
+		zoom_on_mouse_position(frc, 0);
+	render_frc(frc);
+}
 
 void	handle_key(mlx_key_data_t keydata, void *param)
 {
@@ -29,10 +64,11 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 			frc->offset_x -= OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_RIGHT)
 			frc->offset_x += OFFSET_STEP / frc->zoom;
-		else if (keydata.key == MLX_KEY_Z)
-			frc->zoom *= ZOOM_STEP;
-		else if (keydata.key == MLX_KEY_X)
-			frc->zoom /= ZOOM_STEP;
+	}
+	else if (keydata.key == MLX_KEY_ESCAPE)
+	{
+		free_frc(frc);
+		mlx_close_window(frc->mlx);
 	}
 	render_frc(frc);
 }

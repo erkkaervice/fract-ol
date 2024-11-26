@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:17:21 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:17:30 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 
 	z[0] = frc->x_scale * (x - WID / 2.0) / frc->zoom + frc->offset_x;
 	z[1] = frc->y_scale * (y - HEI / 2.0) / frc->zoom + frc->offset_y;
-
 	i = 0;
 	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
 	{
@@ -33,7 +32,6 @@ static void	calculate_julia_pixel(int x, int y, t_frc *frc, double c_re)
 	color = calculate_psychedelic_color(i, 100);
 	mlx_put_pixel(frc->img, x, y, color);
 }
-
 
 void	render_julia(t_frc *frc)
 {

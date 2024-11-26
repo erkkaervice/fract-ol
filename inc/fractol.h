@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:18:55 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 15:07:24 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	render_frc(t_frc *frc);
 void	render_mandelbrot(t_frc *frc);
 void	render_julia(t_frc *frc);
 void	handle_key(mlx_key_data_t keydata, void *param);
+void	handle_mouse_scroll(double x, double y, void *param);
+void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
 void	free_frc(t_frc *frc);
 
 #endif
