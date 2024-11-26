@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 15:07:01 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:02:14 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 # define WID 900
 # define HEI 900
-# define MAX_ITER 100
 # define ZOOM_STEP 1.1
 # define OFFSET_STEP 0.1
 

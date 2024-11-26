@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/22 14:17:31 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:05:05 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_frc	*init_frc(mlx_t *mlx)
 	}
 	frc->type = MANDELBROT;
 	frc->zoom = 1.0;
-	frc->offset_x = 0;
-	frc->offset_y = 0;
+	frc->offset_x = 0.0;
+	frc->offset_y = 0.0;
 	frc->mlx = mlx;
 	return (frc);
 }
