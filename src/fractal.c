@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:05:05 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:10:13 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_frc	*init_frc(mlx_t *mlx)
 {
-	t_frc	*frc;
+    t_frc	*frc;
 
 	frc = malloc(sizeof(t_frc));
 	if (!frc)
@@ -33,7 +33,10 @@ t_frc	*init_frc(mlx_t *mlx)
 	frc->zoom = 1.0;
 	frc->offset_x = 0.0;
 	frc->offset_y = 0.0;
+	frc->julia_re = -0.8;
+	frc->julia_im = 0.156;
 	frc->mlx = mlx;
+	frc->color_shift = 0.0;
 	return (frc);
 }
 
@@ -44,7 +47,7 @@ void	render_frc(t_frc *frc)
 	if (frc->type == MANDELBROT)
 		render_mandelbrot(frc);
 	else if (frc->type == JULIA)
-		render_julia(frc);
+		render_julia(frc, frc->julia_re, frc->julia_im);
 	mlx_image_to_window(frc->mlx, frc->img, 0, 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 12:18:09 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 14:03:52 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:22:10 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,4 @@ int	calculate_psychedelic_color(int i, int max_iter)
 	b = (int)(b * t);
 	return ((r << 16) | (g << 8) | b);
 }
+

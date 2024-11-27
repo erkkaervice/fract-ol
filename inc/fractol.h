@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/26 15:07:24 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:09:49 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ typedef struct s_frc
 	double		offset_y;
 	double		x_scale;
 	double		y_scale;
+	double		julia_re;
+	double		julia_im;
+	double		color_shift;
 }	t_frc;
 
 t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);
 void	render_frc(t_frc *frc);
 void	render_mandelbrot(t_frc *frc);
-void	render_julia(t_frc *frc);
+void	render_julia(t_frc *frc, double c_re, double c_im);
 void	handle_key(mlx_key_data_t keydata, void *param);
 void	handle_mouse_scroll(double x, double y, void *param);
 void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
