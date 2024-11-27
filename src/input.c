@@ -6,11 +6,35 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/27 14:22:09 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:43:52 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	handle_key(mlx_key_data_t keydata, void *param)
+{
+	t_frc	*frc;
+
+	frc = (t_frc *)param;
+	if (keydata.action == MLX_PRESS)
+	{
+		if (keydata.key == MLX_KEY_ESCAPE)
+		{
+			free_frc(frc);
+			mlx_close_window(frc->mlx);
+		}
+		else if (keydata.key == MLX_KEY_UP)
+			frc->offset_y -= OFFSET_STEP / frc->zoom;
+		else if (keydata.key == MLX_KEY_DOWN)
+			frc->offset_y += OFFSET_STEP / frc->zoom;
+		else if (keydata.key == MLX_KEY_LEFT)
+			frc->offset_x -= OFFSET_STEP / frc->zoom;
+		else if (keydata.key == MLX_KEY_RIGHT)
+			frc->offset_x += OFFSET_STEP / frc->zoom;
+	}
+	render_frc(frc);
+}
 
 void	zoom_on_mouse_position(t_frc *frc, int zoom_in)
 {
@@ -47,28 +71,19 @@ void	handle_mouse_scroll(double x, double y, void *param)
 	render_frc(frc);
 }
 
-void	handle_key(mlx_key_data_t keydata, void *param)
+int	calculate_psychedelic_color(int i, int max_iter)
 {
-	t_frc	*frc;
+	int		r;
+	int		g;
+	int		b;
+	double	t;
 
-	frc = (t_frc *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(frc->mlx);
-	else if (keydata.action == MLX_PRESS)
-	{
-		if (keydata.key == MLX_KEY_UP)
-			frc->offset_y -= OFFSET_STEP / frc->zoom;
-		else if (keydata.key == MLX_KEY_DOWN)
-			frc->offset_y += OFFSET_STEP / frc->zoom;
-		else if (keydata.key == MLX_KEY_LEFT)
-			frc->offset_x -= OFFSET_STEP / frc->zoom;
-		else if (keydata.key == MLX_KEY_RIGHT)
-			frc->offset_x += OFFSET_STEP / frc->zoom;
-	}
-	else if (keydata.key == MLX_KEY_ESCAPE)
-	{
-		free_frc(frc);
-		mlx_close_window(frc->mlx);
-	}
-	render_frc(frc);
+	r = (rand() % 256);
+	g = (rand() % 256);
+	b = (rand() % 256);
+	t = (double)i / (double)max_iter;
+	r = (int)(r * t);
+	g = (int)(g * t);
+	b = (int)(b * t);
+	return ((r << 16) | (g << 8) | b);
 }

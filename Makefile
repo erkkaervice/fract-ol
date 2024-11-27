@@ -6,7 +6,7 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
-#    Updated: 2024/11/22 12:20:00 by eala-lah         ###   ########.fr        #
+#    Updated: 2024/11/27 18:26:26 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,10 @@ MLX         = $(MLX_DIR)/libmlx42.a
 
 SRC_DIR     = src/
 SRC         = \
-    color.c \
     fractal.c \
+    fractals.c \
     input.c \
-    julia.c \
     main.c \
-    mandelbrot.c
 
 OBJ_DIR     = obj/
 OBJS        = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))

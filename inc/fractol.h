@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/27 14:09:49 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:43:41 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 
 # include "../mlx42/include/MLX42/MLX42.h"
 # include "../libft/inc/libft.h"
-# include "keys.h"
-# include "colors.h"
 # include <math.h>
-# include <stdlib.h>
 
-# define WID 900
-# define HEI 900
-# define ZOOM_STEP 1.1
-# define OFFSET_STEP 0.1
+# define WID            900
+# define HEI            900
+# define ZOOM_STEP      1.1
+# define OFFSET_STEP    0.1
+# define MAX_ITER       100
+
+# define MLX_KEY_ESCAPE 256
+# define MLX_KEY_UP     265
+# define MLX_KEY_DOWN   264
+# define MLX_KEY_LEFT   263
+# define MLX_KEY_RIGHT  262
+# define MLX_KEY_C      8
 
 typedef enum e_frc_type
 {
@@ -44,16 +49,16 @@ typedef struct s_frc
 	double		y_scale;
 	double		julia_re;
 	double		julia_im;
-	double		color_shift;
 }	t_frc;
 
-t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);
 void	render_frc(t_frc *frc);
-void	render_mandelbrot(t_frc *frc);
-void	render_julia(t_frc *frc, double c_re, double c_im);
-void	handle_key(mlx_key_data_t keydata, void *param);
-void	handle_mouse_scroll(double x, double y, void *param);
-void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
+t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);
 void	free_frc(t_frc *frc);
+void	pixel_julia(int x, int y, t_frc *frc);
+void	pixel_mandelbrot(int x, int y, t_frc *frc);
+void	handle_key(mlx_key_data_t keydata, void *param);
+void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
+void	handle_mouse_scroll(double x, double y, void *param);
+int		calculate_psychedelic_color(int i, int max_iter);
 
 #endif

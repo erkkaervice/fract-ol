@@ -6,26 +6,36 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/27 14:10:13 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:44:15 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+t_frc_type	get_frc_type(const char *name)
+{
+	if (ft_strncmp(name, "mandelbrot", 11) == 0)
+		return (MANDELBROT);
+	else if (ft_strncmp(name, "julia", 6) == 0)
+		return (JULIA);
+	else
+		return (UNKNOWN_FRACTAL);
+}
+
 t_frc	*init_frc(mlx_t *mlx)
 {
-    t_frc	*frc;
+	t_frc	*frc;
 
 	frc = malloc(sizeof(t_frc));
 	if (!frc)
 	{
-		ft_printf("Error: Failed to allocate fractal structure.\n");
+		ft_error("Error: Failed to allocate fractal structure.");
 		return (NULL);
 	}
 	frc->img = mlx_new_image(mlx, WID, HEI);
 	if (!frc->img)
 	{
-		ft_printf("Error: Failed to create image.\n");
+		ft_error("Error: Failed to create image.");
 		free(frc);
 		return (NULL);
 	}
@@ -36,29 +46,33 @@ t_frc	*init_frc(mlx_t *mlx)
 	frc->julia_re = -0.8;
 	frc->julia_im = 0.156;
 	frc->mlx = mlx;
-	frc->color_shift = 0.0;
 	return (frc);
 }
 
 void	render_frc(t_frc *frc)
 {
+	int	y;
+	int	x;
+
 	if (!frc->img || frc->img->pixels == NULL)
 		return ;
-	if (frc->type == MANDELBROT)
-		render_mandelbrot(frc);
-	else if (frc->type == JULIA)
-		render_julia(frc, frc->julia_re, frc->julia_im);
+	frc->x_scale = 4.0 / WID;
+	frc->y_scale = 4.0 / HEI;
+	y = 0;
+	while (y < HEI)
+	{
+		x = 0;
+		while (x < WID)
+		{
+			if (frc->type == MANDELBROT)
+				pixel_mandelbrot(x, y, frc);
+			else if (frc->type == JULIA)
+				pixel_julia(x, y, frc);
+			x++;
+		}
+		y++;
+	}
 	mlx_image_to_window(frc->mlx, frc->img, 0, 0);
-}
-
-t_frc_type	get_frc_type(const char *name)
-{
-	if (ft_strncmp(name, "mandelbrot", 11) == 0)
-		return (MANDELBROT);
-	else if (ft_strncmp(name, "julia", 6) == 0)
-		return (JULIA);
-	else
-		return (UNKNOWN_FRACTAL);
 }
 
 t_frc	*launch_frc(mlx_t *mlx, const char *frc_name)
