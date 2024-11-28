@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/27 18:43:52 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:14:15 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 	t_frc	*frc;
 
 	frc = (t_frc *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{
+		mlx_close_window(frc->mlx);
+		return ;
+	}
 	if (keydata.action == MLX_PRESS)
 	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-		{
-			free_frc(frc);
-			mlx_close_window(frc->mlx);
-		}
-		else if (keydata.key == MLX_KEY_UP)
+		if (keydata.key == MLX_KEY_UP)
 			frc->offset_y -= OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_DOWN)
 			frc->offset_y += OFFSET_STEP / frc->zoom;
@@ -32,6 +32,8 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 			frc->offset_x -= OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_RIGHT)
 			frc->offset_x += OFFSET_STEP / frc->zoom;
+		else if (keydata.key == MLX_KEY_C)
+			frc->color_mode = (frc->color_mode + 1) % 3;
 	}
 	render_frc(frc);
 }
@@ -71,19 +73,30 @@ void	handle_mouse_scroll(double x, double y, void *param)
 	render_frc(frc);
 }
 
-int	calculate_psychedelic_color(int i, int max_iter)
+int	calculate_psychedelic_color(int i, int max_iter, int color_mode)
 {
-	int		r;
-	int		g;
-	int		b;
 	double	t;
+	int		r, g, b;
 
-	r = (rand() % 256);
-	g = (rand() % 256);
-	b = (rand() % 256);
 	t = (double)i / (double)max_iter;
-	r = (int)(r * t);
-	g = (int)(g * t);
-	b = (int)(b * t);
+	if (color_mode == 0)
+	{
+		r = (int)(rand() % 256 * t);
+		g = (int)(rand() % 256 * t);
+		b = (int)(rand() % 256 * t);
+	}
+	else if (color_mode == 1)
+	{
+		r = (int)(9 * (1 - t) * t * t * t * 255);
+		g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+		b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	}
+	else
+	{
+		r = (int)(255 * t);
+		g = (int)(255 * t);
+		b = (int)(255 * t);
+	}
 	return ((r << 16) | (g << 8) | b);
 }
+

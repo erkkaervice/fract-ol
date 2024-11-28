@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/27 18:36:32 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:07:37 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	pixel_julia(int x, int y, t_frc *frc)
 		z[0] = tmp;
 		i++;
 	}
-	color = calculate_psychedelic_color(i, MAX_ITER);
+	color = calculate_psychedelic_color(i, MAX_ITER, frc->color_mode);
 	mlx_put_pixel(frc->img, x, y, color);
 }
 
@@ -57,6 +57,6 @@ void	pixel_mandelbrot(int x, int y, t_frc *frc)
 		z[0] = tmp;
 		i++;
 	}
-	color = calculate_psychedelic_color(i, MAX_ITER);
+	color = calculate_psychedelic_color(i, MAX_ITER, frc->color_mode);
 	mlx_put_pixel(frc->img, x, y, color);
 }
