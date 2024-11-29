@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/28 15:07:37 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:40:14 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,36 @@ void	pixel_mandelbrot(int x, int y, t_frc *frc)
 	{
 		tmp = z[0] * z[0] - z[1] * z[1] + c[0];
 		z[1] = 2 * z[0] * z[1] + c[1];
+		z[0] = tmp;
+		i++;
+	}
+	color = calculate_psychedelic_color(i, MAX_ITER, frc->color_mode);
+	mlx_put_pixel(frc->img, x, y, color);
+}
+
+void	pixel_phoenix(int x, int y, t_frc *frc)
+{
+	double	z[2];
+	double	z_prev[2];
+	double	c[2];
+	int		i;
+	int		color;
+	double	tmp;
+
+	z[0] = 0.0;
+	z[1] = 0.0;
+	z_prev[0] = 0.0;
+	z_prev[1] = 0.0;
+	i = 0;
+	calculate_scaled_coordinates(x, y, frc, c);
+	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
+	{
+		tmp = z[0] * z[0] - z[1] * z[1] + c[0] + \
+			frc->p * (z_prev[0] * z_prev[0] - z_prev[1] * z_prev[1]);
+		z_prev[0] = z[0];
+		z_prev[1] = z[1];
+		z[1] = 2.0 * z[0] * z[1] + c[1] + \
+			frc->p * (2.0 * z_prev[0] * z_prev[1]);
 		z[0] = tmp;
 		i++;
 	}

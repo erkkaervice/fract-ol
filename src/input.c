@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/28 14:14:15 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:30:41 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	handle_mouse_scroll(double x, double y, void *param)
 int	calculate_psychedelic_color(int i, int max_iter, int color_mode)
 {
 	double	t;
-	int		r, g, b;
+	int		r;
+	int		g;
+	int		b;
 
 	t = (double)i / (double)max_iter;
 	if (color_mode == 0)
@@ -99,4 +101,3 @@ int	calculate_psychedelic_color(int i, int max_iter, int color_mode)
 	}
 	return ((r << 16) | (g << 8) | b);
 }
-

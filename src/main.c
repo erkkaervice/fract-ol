@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/28 15:07:37 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:57:43 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	show_usage(void)
 	ft_printf(" - mandelbrot\n");
 	ft_printf(" - julia <real_part> <imaginary_part>\n");
 	ft_printf("    Example: ./fractol julia -0.8 0.156\n");
+	ft_printf(" - phoenix\n");
 }
 
 int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)

@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/28 15:07:37 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:29:09 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum e_frc_type
 {
 	MANDELBROT,
 	JULIA,
+	PHOENIX,
 	UNKNOWN_FRACTAL
 }	t_frc_type;
 
@@ -49,7 +50,8 @@ typedef struct s_frc
 	double		y_scale;
 	double		julia_re;
 	double		julia_im;
-	int		color_mode;
+	int			color_mode;
+	double		p;
 }	t_frc;
 
 void	render_frc(t_frc *frc);
@@ -57,6 +59,7 @@ t_frc	*launch_frc(mlx_t *mlx, const char *frc_name);
 void	free_frc(t_frc *frc);
 void	pixel_julia(int x, int y, t_frc *frc);
 void	pixel_mandelbrot(int x, int y, t_frc *frc);
+void	pixel_phoenix(int x, int y, t_frc *frc);
 void	handle_key(mlx_key_data_t keydata, void *param);
 void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
 void	handle_mouse_scroll(double x, double y, void *param);
