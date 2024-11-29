@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 14:30:03 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:16:17 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ t_frc	*init_frc(mlx_t *mlx)
 	frc->julia_re = -0.8;
 	frc->julia_im = 0.156;
 	frc->mlx = mlx;
-	frc->p = -2.6;
+	frc->color_mode = 0;
+	frc->p = 0.42;
 	return (frc);
 }
 

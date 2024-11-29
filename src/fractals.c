@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 14:40:14 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 18:14:51 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,43 @@ void	pixel_mandelbrot(int x, int y, t_frc *frc)
 	mlx_put_pixel(frc->img, x, y, color);
 }
 
+void	calculate_phoenix_z(double *z, double *c, double p)
+{
+	double	tmp_real;
+	double	tmp_prev_re;
+	double	tmp_prev_im;
+
+	tmp_real = z[0] * z[0] - z[1] * z[1] + c[0] + p * z[2];
+	tmp_prev_re = z[0];
+	tmp_prev_im = z[1];
+	z[1] = 2.0 * z[0] * z[1] + c[1] + p * z[3];
+	z[0] = tmp_real;
+	z[2] = tmp_prev_re;
+	z[3] = tmp_prev_im;
+}
+
+void	calculate_scaled_coordinates_phoenix(int x, int y, t_frc *frc, double *c)
+{
+	c[0] = (x - WID / 2.0) * 4.0 / (WID * frc->zoom) + frc->offset_x;
+	c[1] = (y - HEI / 2.0) * 4.0 / (HEI * frc->zoom) + frc->offset_y;
+}
+
 void	pixel_phoenix(int x, int y, t_frc *frc)
 {
-	double	z[2];
-	double	z_prev[2];
+	double	z[4];
 	double	c[2];
 	int		i;
 	int		color;
-	double	tmp;
 
 	z[0] = 0.0;
 	z[1] = 0.0;
-	z_prev[0] = 0.0;
-	z_prev[1] = 0.0;
+	z[2] = 0.0;
+	z[3] = 0.0;
+	calculate_scaled_coordinates_phoenix(x, y, frc, c);
 	i = 0;
-	calculate_scaled_coordinates(x, y, frc, c);
-	while (z[0] * z[0] + z[1] * z[1] <= 4 && i < MAX_ITER)
+	while (z[0] * z[0] + z[1] * z[1] <= 4.0 && i < MAX_ITER)
 	{
-		tmp = z[0] * z[0] - z[1] * z[1] + c[0] + \
-			frc->p * (z_prev[0] * z_prev[0] - z_prev[1] * z_prev[1]);
-		z_prev[0] = z[0];
-		z_prev[1] = z[1];
-		z[1] = 2.0 * z[0] * z[1] + c[1] + \
-			frc->p * (2.0 * z_prev[0] * z_prev[1]);
-		z[0] = tmp;
+		calculate_phoenix_z(z, c, frc->p);
 		i++;
 	}
 	color = calculate_psychedelic_color(i, MAX_ITER, frc->color_mode);

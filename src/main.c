@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 12:57:43 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:51:11 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)
 {
 	if (argc < 2 || (ft_strncmp(argv[1], "julia", 5) == 0 && argc != 4))
 	{
-		ft_error("Error: Invalid arguments.\n");
 		show_usage();
 		return (0);
 	}

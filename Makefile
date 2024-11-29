@@ -6,7 +6,7 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
-#    Updated: 2024/11/27 18:26:26 by eala-lah         ###   ########.fr        #
+#    Updated: 2024/11/29 15:00:14 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,14 +61,14 @@ $(NAME): $(OBJS)
 bonus: all
 
 clean:
-	@rm -rf $(OBJ_DIR) 2> /dev/null || { echo "Failed to clean object files." >&2; }
-	@make -C $(LIBFT_DIR) clean > /dev/null 2>&1 || { echo "Failed to clean libft." >&2; }
-	@rm -rf $(MLX_DIR)/build 2> /dev/null || { echo "Failed to remove MLX build directory." >&2; }
+	@rm -rf $(OBJ_DIR) 2> /dev/null || { echo "Failed to clean object files." >&2; exit 1; }
+	@make -C $(LIBFT_DIR) clean > /dev/null 2>&1 || { if [ -d "$(LIBFT_DIR)" ]; then echo "Failed to clean libft." >&2; exit 1; fi; }
+	@rm -rf $(MLX_DIR)/build 2> /dev/null || { if [ -d "$(MLX_DIR)" ]; then echo "Failed to remove MLX build directory." >&2; exit 1; fi; }
 
 fclean: clean
-	@rm -f $(LIBFT) $(NAME) 2> /dev/stderr || { echo "Failed to remove generated files." >&2; }
-	@rm -rf $(MLX_DIR) 2> /dev/stderr || { echo "Failed to remove MLX library." >&2; exit 1; }
-	@rm -rf $(LIBFT_DIR) 2> /dev/stderr || { echo "Failed to remove libft directory." >&2; exit 1; }
+	@rm -f $(LIBFT) $(NAME) 2> /dev/stderr || { echo "Failed to remove generated files." >&2; exit 1; }
+	@rm -rf $(LIBFT_DIR) 2> /dev/stderr || { if [ -d "$(LIBFT_DIR)" ]; then echo "Failed to remove libft directory." >&2; exit 1; fi; }
+	@rm -rf $(MLX_DIR) 2> /dev/stderr || { if [ -d "$(MLX_DIR)" ]; then echo "Failed to remove MLX library." >&2; exit 1; fi; }
 
 re: fclean all
 
