@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 17:54:35 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:12:55 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define MLX_KEY_LEFT   263
 # define MLX_KEY_RIGHT  262
 # define MLX_KEY_C      67
+# define MLX_KEY_W      87
+# define MLX_KEY_S      83
 
 typedef enum e_frc_type
 {

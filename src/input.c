@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 15:08:49 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:24:39 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 
 	frc = (t_frc *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
 		mlx_close_window(frc->mlx);
-		return ;
-	}
 	if (keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_UP)
@@ -34,6 +31,10 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 			frc->offset_x += OFFSET_STEP / frc->zoom;
 		else if (keydata.key == MLX_KEY_C)
 			frc->color_mode = (frc->color_mode + 1) % 3;
+		else if (keydata.key == MLX_KEY_W)
+			frc->p += 0.01;
+		else if (keydata.key == MLX_KEY_S)
+			frc->p -= 0.01;
 	}
 	render_frc(frc);
 }
