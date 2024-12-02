@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/02 16:43:38 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:47:18 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ int	main(int argc, char **argv)
 		mlx_terminate(mlx);
 		return (1);
 	}
-	frc->zoom = 1.0;
-	frc->offset_x = 0.0;
-	frc->offset_y = 0.0;
 	mlx_scroll_hook(frc->mlx, &handle_mouse_scroll, frc);
 	mlx_loop(mlx);
 	free_frc(frc);
