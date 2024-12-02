@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 18:16:17 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:44:59 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	render_frc(t_frc *frc)
 	mlx_image_to_window(frc->mlx, frc->img, 0, 0);
 }
 
-t_frc	*launch_frc(mlx_t *mlx, const char *frc_name)
+t_frc	*launch_frc(mlx_t *mlx, const char *frc_name, int argc, char **argv)
 {
 	t_frc		*frc;
 	t_frc_type	type;
@@ -96,6 +96,14 @@ t_frc	*launch_frc(mlx_t *mlx, const char *frc_name)
 	if (!frc)
 		return (NULL);
 	frc->type = type;
+	if (type == JULIA && argc == 4)
+	{
+		if (!parse_julia_parameters(argv, frc))
+		{
+			free_frc(frc);
+			return (NULL);
+		}
+	}
 	render_frc(frc);
 	mlx_key_hook(mlx, &handle_key, frc);
 	return (frc);

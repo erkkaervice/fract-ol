@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/11/29 14:51:11 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:43:38 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	show_usage(void)
 {
-	ft_printf("Usage: ./fractol [fractal_type] [options]\n");
+	ft_printf("Usage: ./fractol [fractal_type] [parameters]\n");
 	ft_printf("Available fractals:\n");
 	ft_printf(" - mandelbrot\n");
 	ft_printf(" - julia <real_part> <imaginary_part>\n");
@@ -32,7 +32,7 @@ int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)
 	*mlx = mlx_init(WID, HEI, "fractol", 1);
 	if (!*mlx)
 		ft_error("Error: Failed to initialize MLX.\n");
-	*frc = launch_frc(*mlx, argv[1]);
+	*frc = launch_frc(*mlx, argv[1], argc, argv);
 	if (!*frc)
 	{
 		show_usage();
