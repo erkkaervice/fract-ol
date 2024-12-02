@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:16:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/02 12:44:13 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:06:09 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ void	calculate_phoenix_z(double *z, double *c, double p)
 	z[3] = tmp_prev_im;
 }
 
-void	calculate_phoenix(int x, int y, t_frc *frc, double *c)
-{
-	c[0] = (x - WID / 2.0) * 4.0 / (WID * frc->zoom) + frc->offset_x;
-	c[1] = (y - HEI / 2.0) * 4.0 / (HEI * frc->zoom) + frc->offset_y;
-}
-
 void	pixel_phoenix(int x, int y, t_frc *frc)
 {
 	double	z[4];
@@ -93,7 +87,7 @@ void	pixel_phoenix(int x, int y, t_frc *frc)
 	z[1] = 0.0;
 	z[2] = 0.0;
 	z[3] = 0.0;
-	calculate_phoenix(x, y, frc, c);
+	calculate_scaled_coordinates(x, y, frc, c);
 	i = 0;
 	while (z[0] * z[0] + z[1] * z[1] <= 4.0 && i < MAX_ITER)
 	{
