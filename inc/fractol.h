@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/03 17:18:45 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:28:22 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,14 @@ typedef struct s_frc
 void	ft_render(t_frc *frc);
 t_frc	*ft_launch(mlx_t *mlx, const char *frc_name, int argc, char **argv);
 t_frc	*ft_freee(t_frc *frc);
-int		ft_juliarguments(char **argv, t_frc *frc);
 void	ft_mandelbrot(int x, int y, t_frc *frc);
 void	ft_julia(int x, int y, t_frc *frc);
 void	ft_phoenix(int x, int y, t_frc *frc);
-int		ft_validate(int argc, char **argv, mlx_t **mlx, t_frc **frc);
 void	ft_keys(mlx_key_data_t keydata, void *param);
 void	ft_zoom(t_frc *frc, int zoom_in);
 void	ft_scroll(double x, double y, void *param);
 int		ft_color(int i, int max_iter, int color_mode);
 void	ft_instructions(void);
+int		ft_juliarguments(char **argv, t_frc *frc);
 
 #endif
