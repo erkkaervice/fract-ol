@@ -6,33 +6,33 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/03 15:14:31 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:22:08 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)
+int	ft_validate(int argc, char **argv, mlx_t **mlx, t_frc **frc)
 {
 	if (argc < 2 || (ft_strncmp(argv[1], "julia", 5) == 0 && argc != 4))
 	{
-		show_usage();
+		ft_instructions();
 		return (0);
 	}
 	*mlx = mlx_init(WID, HEI, "fractol", 1);
 	if (!*mlx)
 		ft_error("Error: Failed to initialize MLX.\n");
-	*frc = launch_frc(*mlx, argv[1], argc, argv);
+	*frc = ft_launch(*mlx, argv[1], argc, argv);
 	if (!*frc)
 	{
-		show_usage();
+		ft_instructions();
 		mlx_terminate(*mlx);
 		return (0);
 	}
 	return (1);
 }
 
-void	handle_key(mlx_key_data_t keydata, void *param)
+void	ft_keys(mlx_key_data_t keydata, void *param)
 {
 	t_frc	*frc;
 
@@ -56,10 +56,10 @@ void	handle_key(mlx_key_data_t keydata, void *param)
 		else if (keydata.key == MLX_KEY_S)
 			frc->p -= 0.01;
 	}
-	render_frc(frc);
+	ft_render(frc);
 }
 
-void	zoom_on_mouse_position(t_frc *frc, int zoom_in)
+void	ft_zoom(t_frc *frc, int zoom_in)
 {
 	int		mouse_x;
 	int		mouse_y;
@@ -81,20 +81,20 @@ void	zoom_on_mouse_position(t_frc *frc, int zoom_in)
 	frc->y_scale = 4.0 / HEI / frc->zoom;
 }
 
-void	handle_mouse_scroll(double x, double y, void *param)
+void	ft_scroll(double x, double y, void *param)
 {
 	t_frc	*frc;
 
 	(void)x;
 	frc = (t_frc *)param;
 	if (y > 0)
-		zoom_on_mouse_position(frc, 1);
+		ft_zoom(frc, 1);
 	else
-		zoom_on_mouse_position(frc, 0);
-	render_frc(frc);
+		ft_zoom(frc, 0);
+	ft_render(frc);
 }
 
-int	calculate_psychedelic_color(int i, int max_iter, int color_mode)
+int	ft_color(int i, int max_iter, int color_mode)
 {
 	double	t;
 	int		r;

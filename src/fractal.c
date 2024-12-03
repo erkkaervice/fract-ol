@@ -6,25 +6,24 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:13:11 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/03 15:36:17 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:47:07 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_frc_type	get_frc_type(const char *name)
+t_frc_type	ft_selection(const char *name)
 {
 	if (ft_strncmp(name, "mandelbrot", 11) == 0)
 		return (MANDELBROT);
-	else if (ft_strncmp(name, "julia", 6) == 0)
+	if (ft_strncmp(name, "julia", 6) == 0)
 		return (JULIA);
-	else if (ft_strncmp(name, "phoenix", 8) == 0)
+	if (ft_strncmp(name, "phoenix", 8) == 0)
 		return (PHOENIX);
-	else
-		return (UNKNOWN_FRACTAL);
+	return (UNKNOWN_FRACTAL);
 }
 
-t_frc	*init_frc(mlx_t *mlx)
+t_frc	*ft_initialize(mlx_t *mlx)
 {
 	t_frc	*frc;
 
@@ -41,19 +40,16 @@ t_frc	*init_frc(mlx_t *mlx)
 		free(frc);
 		return (NULL);
 	}
-	frc->type = MANDELBROT;
+	frc->mlx = mlx;
 	frc->zoom = 1.0;
 	frc->offset_x = 0.0;
 	frc->offset_y = 0.0;
-	frc->julia_re = -0.8;
-	frc->julia_im = 0.156;
-	frc->mlx = mlx;
 	frc->color_mode = 0;
 	frc->p = 0.27;
 	return (frc);
 }
 
-void	render_frc(t_frc *frc)
+void	ft_render(t_frc *frc)
 {
 	int	x;
 	int	y;
@@ -67,11 +63,11 @@ void	render_frc(t_frc *frc)
 		while (x < WID)
 		{
 			if (frc->type == MANDELBROT)
-				pixel_mandelbrot(x, y, frc);
+				ft_mandelbrot(x, y, frc);
 			else if (frc->type == JULIA)
-				pixel_julia(x, y, frc);
+				ft_julia(x, y, frc);
 			else if (frc->type == PHOENIX)
-				pixel_phoenix(x, y, frc);
+				ft_phoenix(x, y, frc);
 			x++;
 		}
 		y++;
@@ -79,35 +75,33 @@ void	render_frc(t_frc *frc)
 	mlx_image_to_window(frc->mlx, frc->img, 0, 0);
 }
 
-t_frc	*launch_frc(mlx_t *mlx, const char *frc_name, int argc, char **argv)
+t_frc	*ft_launch(mlx_t *mlx, const char *frc_name, int argc, char **argv)
 {
 	t_frc		*frc;
 	t_frc_type	type;
 
-	type = get_frc_type(frc_name);
+	type = ft_selection(frc_name);
 	if (type == UNKNOWN_FRACTAL)
 	{
 		ft_printf("Error: Unknown fractal type.\n");
 		return (NULL);
 	}
-	frc = init_frc(mlx);
+	frc = ft_initialize(mlx);
 	if (!frc)
 		return (NULL);
 	frc->type = type;
 	if (type == JULIA && argc == 4)
 	{
-		if (!parse_julia_parameters(argv, frc))
-		{
-			free_frc(frc);
-			return (NULL);
-		}
+		if (!ft_juliarguments(argv, frc))
+			ft_freee(frc);
 	}
-	render_frc(frc);
-	mlx_key_hook(mlx, &handle_key, frc);
+	ft_render(frc);
+	mlx_key_hook(mlx, &ft_keys, frc);
+	mlx_scroll_hook(frc->mlx, &ft_scroll, frc);
 	return (frc);
 }
 
-void	free_frc(t_frc *frc)
+t_frc	*ft_freee(t_frc *frc)
 {
 	if (frc)
 	{
@@ -115,4 +109,5 @@ void	free_frc(t_frc *frc)
 			mlx_delete_image(frc->mlx, frc->img);
 		free(frc);
 	}
+	return (NULL);
 }

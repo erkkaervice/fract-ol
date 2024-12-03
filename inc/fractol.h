@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/03 15:15:50 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:18:45 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,18 @@ typedef struct s_frc
 	double		p;
 }	t_frc;
 
-void	render_frc(t_frc *frc);
-t_frc	*launch_frc(mlx_t *mlx, const char *frc_name, int argc, char **argv);
-void	free_frc(t_frc *frc);
-int		parse_julia_parameters(char **argv, t_frc *frc);
-void	pixel_julia(int x, int y, t_frc *frc);
-void	pixel_mandelbrot(int x, int y, t_frc *frc);
-void	pixel_phoenix(int x, int y, t_frc *frc);
-int		validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc);
-void	handle_key(mlx_key_data_t keydata, void *param);
-void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
-void	handle_mouse_scroll(double x, double y, void *param);
-int		calculate_psychedelic_color(int i, int max_iter, int color_mode);
-void	show_usage(void);
+void	ft_render(t_frc *frc);
+t_frc	*ft_launch(mlx_t *mlx, const char *frc_name, int argc, char **argv);
+t_frc	*ft_freee(t_frc *frc);
+int		ft_juliarguments(char **argv, t_frc *frc);
+void	ft_mandelbrot(int x, int y, t_frc *frc);
+void	ft_julia(int x, int y, t_frc *frc);
+void	ft_phoenix(int x, int y, t_frc *frc);
+int		ft_validate(int argc, char **argv, mlx_t **mlx, t_frc **frc);
+void	ft_keys(mlx_key_data_t keydata, void *param);
+void	ft_zoom(t_frc *frc, int zoom_in);
+void	ft_scroll(double x, double y, void *param);
+int		ft_color(int i, int max_iter, int color_mode);
+void	ft_instructions(void);
 
 #endif
