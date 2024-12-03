@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:49:18 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/02 16:44:45 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:15:50 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ typedef struct s_frc
 void	render_frc(t_frc *frc);
 t_frc	*launch_frc(mlx_t *mlx, const char *frc_name, int argc, char **argv);
 void	free_frc(t_frc *frc);
+int		parse_julia_parameters(char **argv, t_frc *frc);
 void	pixel_julia(int x, int y, t_frc *frc);
 void	pixel_mandelbrot(int x, int y, t_frc *frc);
 void	pixel_phoenix(int x, int y, t_frc *frc);
+int		validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc);
 void	handle_key(mlx_key_data_t keydata, void *param);
 void	zoom_on_mouse_position(t_frc *frc, int zoom_in);
 void	handle_mouse_scroll(double x, double y, void *param);
 int		calculate_psychedelic_color(int i, int max_iter, int color_mode);
-int		parse_julia_parameters(char **argv, t_frc *frc);
+void	show_usage(void);
 
 #endif

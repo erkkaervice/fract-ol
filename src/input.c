@@ -6,11 +6,31 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:14:30 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/02 12:24:39 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:14:31 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)
+{
+	if (argc < 2 || (ft_strncmp(argv[1], "julia", 5) == 0 && argc != 4))
+	{
+		show_usage();
+		return (0);
+	}
+	*mlx = mlx_init(WID, HEI, "fractol", 1);
+	if (!*mlx)
+		ft_error("Error: Failed to initialize MLX.\n");
+	*frc = launch_frc(*mlx, argv[1], argc, argv);
+	if (!*frc)
+	{
+		show_usage();
+		mlx_terminate(*mlx);
+		return (0);
+	}
+	return (1);
+}
 
 void	handle_key(mlx_key_data_t keydata, void *param)
 {

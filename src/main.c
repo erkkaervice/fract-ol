@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/02 16:47:18 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:33:28 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,6 @@ void	show_usage(void)
 	ft_printf(" - phoenix\n");
 }
 
-int	validate_and_initialize(int argc, char **argv, mlx_t **mlx, t_frc **frc)
-{
-	if (argc < 2 || (ft_strncmp(argv[1], "julia", 5) == 0 && argc != 4))
-	{
-		show_usage();
-		return (0);
-	}
-	*mlx = mlx_init(WID, HEI, "fractol", 1);
-	if (!*mlx)
-		ft_error("Error: Failed to initialize MLX.\n");
-	*frc = launch_frc(*mlx, argv[1], argc, argv);
-	if (!*frc)
-	{
-		show_usage();
-		mlx_terminate(*mlx);
-		return (0);
-	}
-	return (1);
-}
-
-int	parse_julia_parameters(char **argv, t_frc *frc)
-{
-	if (!ft_isfloat(argv[2]) || !ft_isfloat(argv[3]))
-	{
-		ft_error("Error: Parameters must be valid floating-point numbers.\n");
-		return (0);
-	}
-	frc->julia_re = ft_atof(argv[2]);
-	frc->julia_im = ft_atof(argv[3]);
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	mlx_t	*mlx;
@@ -67,6 +35,7 @@ int	main(int argc, char **argv)
 		mlx_terminate(mlx);
 		return (1);
 	}
+	mlx_key_hook(frc->mlx, &handle_key, frc);
 	mlx_scroll_hook(frc->mlx, &handle_mouse_scroll, frc);
 	mlx_loop(mlx);
 	free_frc(frc);
