@@ -6,7 +6,7 @@
 /*   By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 15:56:06 by eala-lah          #+#    #+#             */
-/*   Updated: 2024/12/03 16:43:05 by eala-lah         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:24:15 by eala-lah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,26 @@ void	ft_instructions(void)
 	ft_printf("    Example: ./fractol julia -0.8 0.156\n");
 	ft_printf("    Example: ./fractol julia -0.75 0.170\n");
 	ft_printf(" - phoenix\n");
+}
+
+int	ft_validate(int argc, char **argv, mlx_t **mlx, t_frc **frc)
+{
+	if (argc < 2 || (ft_strncmp(argv[1], "julia", 5) == 0 && argc != 4))
+	{
+		ft_instructions();
+		return (0);
+	}
+	*mlx = mlx_init(WID, HEI, "fractol", 1);
+	if (!*mlx)
+		ft_error("Error: Failed to initialize MLX.\n");
+	*frc = ft_launch(*mlx, argv[1], argc, argv);
+	if (!*frc)
+	{
+		ft_instructions();
+		mlx_terminate(*mlx);
+		return (0);
+	}
+	return (1);
 }
 
 int	ft_juliarguments(char **argv, t_frc *frc)
