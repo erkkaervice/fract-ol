@@ -6,15 +6,9 @@
 #    By: eala-lah <eala-lah@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/03 15:04:01 by eala-lah          #+#    #+#              #
-#    Updated: 2024/12/04 16:37:38 by eala-lah         ###   ########.fr        #
+#    Updated: 2024/12/05 13:54:13 by eala-lah         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# VARIABLES
-# ---------------------------------------------------------------------------- #
-# This section defines all the variables used throughout the Makefile.
-# It includes paths to necessary directories, library files, and compiler options.
-# ---------------------------------------------------------------------------- #
 
 NAME        = fractol
 INCS        = -I ./inc/ -I ./libft/inc/
@@ -37,13 +31,6 @@ CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror $(INCS) -fPIC
 GIT_FLAGS   = git clone --depth 1
 MLX_FLAGS   = -L $(MLX_DIR)/build -lmlx42 -lglfw -lGL -lm -lpthread -ldl
-
-# RULES
-# ---------------------------------------------------------------------------- #
-# This section contains the rules that describe how to build, clean, and 
-# manage the project. Each rule performs specific actions, such as building 
-# dependencies, compiling source files, and cleaning up.
-# ---------------------------------------------------------------------------- #
 
 # Default target, builds all dependencies and final executable
 all: $(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
